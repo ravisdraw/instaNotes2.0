@@ -1,0 +1,157 @@
+<!--Main Content-->
+<div class="bg-black h-screen w-screen flex">
+    <!--Side Menu-->
+    <div
+      class="bg-slate-200 h-full w-[7%] bg-gradient-to-b from-white via-[#DFDFDF] to-[#A5A5A5] dark:bg-gradient-to-b dark:from-[#2E2E2E] dark:via-[#252525] dark:to-black flex flex-col justify-between"
+    >
+      <!--Icon-->
+      <div
+        class="bg-gradient-to-br from-[#FF046E] to-[#0500F0] h-16 w-[6rem] my-6 flex items-center justify-center drop-shadow-[7px_7px_rgba(0,0,0,0.2)]"
+      >
+        <b class="font-josefin text-[25px] text-white">IN</b>
+      </div>
+      <div class="w-full h-[15%] flex place-items-center justify-center">
+        <div
+          class="bg-white h-10 w-10 rounded-full flex place-items-center justify-center cursor-pointer drop-shadow-lg"
+          (click)="addPost()"
+          title="Add Post"
+        >
+          <img class="w-6" src="../../assets/plus.svg" alt="addpost" />
+        </div>
+      </div>
+    </div>
+    <!--Main Body-->
+    <div class="h-full w-[93%] flex">
+      <!--Left container-->
+      <div class="bg-white h-full w-[70%] p-3 dark:bg-black">
+        <!--search-->
+        <div class="h-[10%] w-full flex place-items-center">
+          <div class="h-full w-[90%] flex items-center pl-10 dark:text-white">
+            <input
+              class="w-[40rem] bg-transparent font-josefin text-[25px] outline-none focus:border-b-2 focus:border-gray-500 dark:focus:border-gray-500"
+              type="text"
+              (ngModelChange)="captureSearchText()"
+              [value]="searchText"
+              (focus)="inputFocused()"
+              (blur)="inputBlur()"
+            />
+          </div>
+          <!--Dark Mode toggle button-->
+          <div
+            class="bg-[#2F2F2F] h-10 w-10 rounded-full flex place-items-center justify-center cursor-pointer dark:bg-white button-gradient drop-shadow-lg"
+            (click)="toggleDarkMode()"
+          >
+            <img
+              class="w-6"
+              src="../../assets/dark.svg"
+              alt="dark"
+              title="Dark Mode"
+              *ngIf="!isDarkMode"
+            />
+            <img
+              class="w-6"
+              src="../../assets/light.svg "
+              alt="light"
+              title="Light Mode"
+              *ngIf="isDarkMode"
+            />
+          </div>
+        </div>
+        <!--filters-->
+        <div class="h-[20%] w-full dark:text-white">
+          <div class="w-full h-[80%] p-2 flex flex-wrap gap-2">
+            <button
+              class="button-gradient border-gradient py-1 px-6 font-josefin font-semibold h-10 text-[18px]"
+              *ngFor="let item of filterList"
+            >
+              {{ item }}
+            </button>
+          </div>
+          <div class="w-full h-[20%] pb-2 flex items-center justify-end pr-5">
+            <button
+              class="button-gradient font-josefin font-semibold text-[18px] px-2 py-1"
+              (click)="viewAllBtn()"
+            >
+              View All
+            </button>
+          </div>
+        </div>
+        <!--List-->
+        <div class="h-[70%] w-full overflow-y-auto">
+          <table
+            class="min-w-full divide-y divide-gray-200 font-josefin font-semibold text-sm dark:text-white dark:divide-[#242424]"
+          >
+            <thead class="bg-gray-50 dark:bg-[#242424]">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left uppercase tracking-wider"
+                >
+                  S.No
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left uppercase tracking-wider"
+                >
+                  Title
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left uppercase tracking-wider"
+                >
+                  Category
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="bg-white divide-y divide-gray-200 font-josefin font-semibold text-[18px] dark:bg-black dark:text-white dark:divide-[#242424]"
+            >
+              <tr>
+                <td class="p-3">1</td>
+                <td class="p-3">
+                  Ravknlkjwlkjelwjeqlweoiqweqoiwehqowehqoiwehqiowheoqiweho
+                </td>
+                <td class="p-3">Tech</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!--Right Container-->
+      <div class="bg-white h-full w-[30%] p-3 pl-0 dark:bg-black">
+        <div
+          class="bg-gradient-to-br from-[#FF046E] via-[#9804A4] to-[#0500F0] h-full w-full flex place-items-center justify-center text-[25px] text-white font-josefin font-semibold"
+          *ngIf="instaID === ''"
+        >
+          No Post Available!
+        </div>
+        <div class="h-full w-full" *ngIf="instaID !== ''">
+          <iframe
+            class="h-full instagram-media instagram-media-rendered"
+            id="instagram-embed-0"
+            [src]="sanitizeUrl()"
+            allowtransparency="true"
+            allowfullscreen="true"
+            frameborder="0"
+            height="612"
+            data-instgrm-payload-id="instagram-media-payload-0"
+            scrolling="no"
+            style="
+              background: white;
+              max-width: 540px;
+              width: calc(100% - 2px);
+              border-radius: 3px;
+              border: 1px solid rgb(219, 219, 219);
+              box-shadow: none;
+              display: block;
+              margin: 0px 0px 12px;
+              min-width: 256px;
+              padding: 0px;
+            "
+          ></iframe>
+          <script async src="//www.instagram.com/embed.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+  
