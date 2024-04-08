@@ -6,8 +6,7 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { AddPostComponent } from './add-post/add-post.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { AddPostComponent } from './components/add-post/add-post.component';
 
 @NgModule({
   declarations: [AppComponent, MainPageComponent, AddPostComponent],

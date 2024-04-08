@@ -38,7 +38,7 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateDayNight();
-    this.addPost()
+    // this.addPost()
   }
 
   addPost() {
