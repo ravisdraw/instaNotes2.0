@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import {
   BrowserModule,
   provideClientHydration,
@@ -17,9 +17,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { MatCardModule } from '@angular/material/card';
+import { WelcomePageComponent } from './components/sign-in/welcome-page/welcome-page.component';
+import { WelcomeLoadingPageComponent } from './components/sign-in/welcome-loading-page/welcome-loading-page.component';
+import { SignInComponent } from './components/sign-in/sign-in/sign-in/sign-in.component';
+import { ComponentsModule } from './components/components.module';
+
 
 @NgModule({
-  declarations: [AppComponent, MainPageComponent, AddPostComponent],
+  declarations: [
+    AppComponent,
+    MainPageComponent,
+    AddPostComponent,
+    WelcomePageComponent,
+    WelcomeLoadingPageComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,6 +44,9 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     MatSelectModule,
     MatButtonModule,
     MatDividerModule,
+    MatCardModule,
+
+    ComponentsModule
   ],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
