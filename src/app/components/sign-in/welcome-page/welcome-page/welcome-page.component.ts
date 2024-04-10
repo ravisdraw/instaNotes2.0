@@ -17,13 +17,14 @@ export class WelcomePageComponent implements OnInit{
       this.isWelcomeLoaded = false;
     }, 2000); 
   }
+  
 
   goToSignIn() {
-    this.router.navigate(['/insta-notes/sign-in']);
+    this.router.navigate(['/sign-in']);
   }
 
   goToSignUp() {
-    this.router.navigate(['/insta-notes/sign-up']);
+    this.router.navigate(['/sign-up']);
   }
 
 }

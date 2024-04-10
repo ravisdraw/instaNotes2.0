@@ -1,0 +1,18 @@
+<div class="w-full h-full font-sans overflow-hidden">
+    <div class="w-full h-[15%] flex place-items-center justify-between px-5">
+        <img class="w-[1.2rem] cursor-pointer" (click)="goToSignIn()" src="../../../../assets/back-arrow-black.svg" alt="back-btn">
+        <div class="text-[1rem] font-medium cursor-pointer" (click)="goToSignUp()">Sign Up Again</div>
+    </div>
+    <div class="w-full h-[25%] flex justify-center place-items-center">
+      <img src="../../../../assets/email verifiy icon.svg" alt="forgot-pass">
+    </div>
+    <div class="custom-gradient w-full h-[60%] rounded-t-[2rem] px-8 py-12 flex flex-col gap-5 pt-6">
+        <div class="font-semibold text-[1.5rem] pt-5 text-white">Email Verification</div>
+        <div class="text-[1rem] text-white pt-5 tracking-wide leading-snug">
+            Check your Inbox to verify your account , if not received any , click Resend and Verify.
+            Once email is verified, come back and click sign in.
+        </div>
+        <button class="text-black text-[1rem] font-semibold w-full p-5 rounded-full cursor-pointer border-none">Resend Email</button>
+        <button class="bg-black text-white text-[1rem] font-semibold w-full p-5 rounded-full cursor-pointer border-none" (click)="goToSignIn()">Sign in</button>
+    </div>
+</div>

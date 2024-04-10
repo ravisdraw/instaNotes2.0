@@ -1,0 +1,67 @@
+<div class="w-full h-full p-3 select-none">
+    <div class="w-full h-[20%] flex flex-col justify-between">
+        <div class="w-full h-[50%] flex justify-between place-items-center gap-3 relative">
+            <img src="../../../../assets/profile icon.svg" alt="profile-icon">
+            <img class="absolute left-[8rem]" src="../../../../assets/search icon.svg" alt="search-mob" *ngIf="searchText===''">
+            <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText">
+            <img src="../../../../assets/filter-icon.svg" alt="filter">
+        </div>
+        <button class="bg-[#FF046E] text-white text-[1rem] font-semibold w-full p-5 rounded-full cursor-pointer" >ADD NEW</button>
+    </div>
+    <div class="bw-full h-[80%]  overflow-y-scroll">
+        <div class="w-full pt-3 shadow-md">
+            <select name="category" class="w-full h-[3rem] text-[1rem] text-black border-none rounded-none bg-white focus:outline-none font-semibold">
+                <option value="" disabled selected>Category</option>
+                <option value="tech">Tech</option>
+                <option value="ai">AI</option>
+                <option value="love">Love</option>
+            </select>
+        </div>
+        <div class="pt-3">
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" *ngFor="let item of posts">
+                    <mat-expansion-panel-header>
+                        <!-- <mat-panel-title>
+                            Post Title
+                        </mat-panel-title> -->
+                        <mat-panel-description>
+                            {{item.id}}. {{item.title}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="flex flex-col gap-3">
+                       <div class="w-full flex place-items-center">
+                        <div class="w-[30%] text-[#FF046E] font-semibold">Title</div>
+                        <div class="w-[70%]">{{item.title}}</div>
+                       </div>
+
+                       <div class="w-full flex place-items-center">
+                        <div class="w-[30%] text-[#FF046E] font-semibold">Category</div>
+                        <div class="w-[70%]">{{item.category}}</div>
+                       </div>
+
+                       <div class="w-full flex place-items-center">
+                        <div class="w-[30%] text-[#FF046E] font-semibold">Keywords</div>
+                        <div class="w-[70%]">{{item.keywords}}</div>
+                       </div>
+
+                       <div class="w-full flex place-items-center">
+                        <div class="w-[30%] text-[#FF046E] font-semibold">Notes</div>
+                        <div class="w-[70%]">{{item.notes}}</div>
+                       </div>
+
+                       <div class="w-full flex place-items-center">
+                        <div class="w-[30%] text-[#FF046E] font-semibold">Action</div>
+                        <div class="w-[70%] flex gap-8">
+                            <img src="../../../../assets/delete-icon.svg" alt="delete">
+                            <img src="../../../../assets/edit-icon.svg" alt="edit">
+                            <img src="../../../../assets/copy-icon.svg" alt="copy">
+                            <img src="../../../../assets/instagram-icon.svg" alt="post">
+                        </div>
+                       </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+</div>

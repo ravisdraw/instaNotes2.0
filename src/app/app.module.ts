@@ -7,7 +7,7 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { MatCardModule } from '@angular/material/card';
-import { WelcomePageComponent } from './components/sign-in/welcome-page/welcome-page.component';
+import { WelcomePageComponent } from './components/sign-in/welcome-page/welcome-page/welcome-page.component';
 import { WelcomeLoadingPageComponent } from './components/sign-in/welcome-loading-page/welcome-loading-page.component';
 import { SignInComponent } from './components/sign-in/sign-in/sign-in/sign-in.component';
 import { ComponentsModule } from './components/components.module';
@@ -29,14 +29,13 @@ import { ComponentsModule } from './components/components.module';
     AppComponent,
     MainPageComponent,
     AddPostComponent,
-    WelcomePageComponent,
-    WelcomeLoadingPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FormsModule,
 
     MatDialogModule,
     MatInputModule,
