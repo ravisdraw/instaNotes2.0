@@ -13,8 +13,19 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
 import { EmailVerificationModule } from './email-verification/email-verification.module';
 import { HomePageComponent } from './home-page/home-page/home-page.component';
 import { HomePageModule } from './home-page/home-page.module';
+import { AddPostComponent } from './add-post/add-post/add-post.component';
+import { AddPostModule } from './add-post/add-post.module';
 
 @NgModule({
-  imports: [CommonModule, SignInModule,SignUpModule, WelcomePageModule, ForgotPassModule, EmailVerificationModule, HomePageModule],
+  imports: [
+    CommonModule,
+    SignInModule,
+    SignUpModule,
+    WelcomePageModule,
+    ForgotPassModule,
+    EmailVerificationModule,
+    HomePageModule,
+    AddPostModule
+  ]
 })
 export class ComponentsModule {}

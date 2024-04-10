@@ -6,7 +6,7 @@
             <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText">
             <img src="../../../../assets/filter-icon.svg" alt="filter">
         </div>
-        <button class="bg-[#FF046E] text-white text-[1rem] font-semibold w-full p-5 rounded-full cursor-pointer" >ADD NEW</button>
+        <button class="bg-[#FF046E] text-white text-[1rem] font-semibold w-full p-5 py-4 rounded-full cursor-pointer" (click)="goToAddPost()" >ADD NEW</button>
     </div>
     <div class="bw-full h-[80%]  overflow-y-scroll">
         <div class="w-full pt-3 shadow-md">
@@ -29,7 +29,7 @@
                             {{item.id}}. {{item.title}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <div class="flex flex-col gap-3">
+                    <div class="flex flex-col gap-5 text-[1rem]">
                        <div class="w-full flex place-items-center">
                         <div class="w-[30%] text-[#FF046E] font-semibold">Title</div>
                         <div class="w-[70%]">{{item.title}}</div>
@@ -52,11 +52,11 @@
 
                        <div class="w-full flex place-items-center">
                         <div class="w-[30%] text-[#FF046E] font-semibold">Action</div>
-                        <div class="w-[70%] flex gap-8">
-                            <img src="../../../../assets/delete-icon.svg" alt="delete">
-                            <img src="../../../../assets/edit-icon.svg" alt="edit">
-                            <img src="../../../../assets/copy-icon.svg" alt="copy">
-                            <img src="../../../../assets/instagram-icon.svg" alt="post">
+                        <div class="w-[70%] flex gap-10">
+                            <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete">
+                            <img class="w-[1.4rem]" src="../../../../assets/edit-icon.svg" alt="edit">
+                            <img class="w-[1.4rem]" src="../../../../assets/copy-icon.svg" alt="copy">
+                            <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post">
                         </div>
                        </div>
                     </div>

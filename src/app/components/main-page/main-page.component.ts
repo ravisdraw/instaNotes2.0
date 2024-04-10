@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { AddPostComponent } from '../add-post/add-post.component';
 
 @Component({
   selector: 'app-main-page',
@@ -41,13 +40,13 @@ export class MainPageComponent implements OnInit {
     // this.addPost()
   }
 
-  addPost() {
-    this.dialog.open(AddPostComponent, {
-      height: '600px',
-      width: '650px',
-      hasBackdrop:true
-    });
-  }
+  // addPost() {
+  //   this.dialog.open(AddPostComponent, {
+  //     height: '600px',
+  //     width: '650px',
+  //     hasBackdrop:true
+  //   });
+  // }
 
   commonURL = 'https://www.instagram.com/p/Ctq5NkItF7A/embed/';
 
