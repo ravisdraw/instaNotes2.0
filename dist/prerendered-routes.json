@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "/",
+    "/email-verification",
+    "/forgot-password",
+    "/home-page",
+    "/sign-in",
+    "/sign-up",
+    "/welcome",
+    "/welcome-page"
+  ]
+}

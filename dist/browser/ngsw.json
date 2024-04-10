@@ -1,0 +1,147 @@
+{
+  "configVersion": 1,
+  "timestamp": 1712725915973,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/chunk-2L4HC7TM.js",
+        "/chunk-2PGODFM6.js",
+        "/chunk-334WTRCU.js",
+        "/chunk-4L2OJJNK.js",
+        "/chunk-5B5U2PHM.js",
+        "/chunk-AKQCXYU3.js",
+        "/chunk-G6BYGQ5Y.js",
+        "/chunk-MBLI5VBO.js",
+        "/chunk-MXNHHFO3.js",
+        "/chunk-PICXG2UD.js",
+        "/chunk-VTS4KZSW.js",
+        "/chunk-W5N3VN3L.js",
+        "/chunk-WIW73NSP.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main-DM44BLCX.js",
+        "/manifest.webmanifest",
+        "/polyfills-RT5I6R6G.js",
+        "/styles-NB7EZSNP.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/Google.svg",
+        "/assets/back-arrow-black.svg",
+        "/assets/back-arrow-white.svg",
+        "/assets/copy-icon.svg",
+        "/assets/dark.svg",
+        "/assets/delete-icon.svg",
+        "/assets/edit-icon.svg",
+        "/assets/email verifiy icon.svg",
+        "/assets/facebook.svg",
+        "/assets/filter-icon.svg",
+        "/assets/forgot_pass_icon.svg",
+        "/assets/frwd-arrow-black.svg",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/instagram-icon.svg",
+        "/assets/light.png",
+        "/assets/light.svg",
+        "/assets/logo.svg",
+        "/assets/plus.svg",
+        "/assets/profile icon.svg",
+        "/assets/search icon.svg",
+        "/assets/search-dark.svg",
+        "/assets/search.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/Google.svg": "e46d4ccf3b317e6affdb49f4b5e15c0fa253ab8b",
+    "/assets/back-arrow-black.svg": "9ceeefd57640110f8a35388487f30630de464fba",
+    "/assets/back-arrow-white.svg": "e992e775b0e5ef61539d765bfbb081a10e7a4b34",
+    "/assets/copy-icon.svg": "2c2127357eb100dba6c3141301e88fefaf89923b",
+    "/assets/dark.svg": "75a888b3ce12be74fab35c15f562a0563603a7d2",
+    "/assets/delete-icon.svg": "70368c50e359fcce684e8ec5e8d896cecba23d38",
+    "/assets/edit-icon.svg": "115487eb676dc5d3efec822340111639b86e5dac",
+    "/assets/email verifiy icon.svg": "09123c59e852dc56972b4904dea62ba478a5f1c7",
+    "/assets/facebook.svg": "01d717f43d84042dae0f811ce695ecbc10eb0a2e",
+    "/assets/filter-icon.svg": "45d533afc41f2327dd81bb9a71e1791c56200c98",
+    "/assets/forgot_pass_icon.svg": "bd41b614ceef5fa244d2d4844900ac9ee8e8a87b",
+    "/assets/frwd-arrow-black.svg": "a7ebcb35c8e8f5120e463b93ebfeab5b0eb308f2",
+    "/assets/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/assets/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/assets/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/assets/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/assets/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/assets/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/assets/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/assets/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/assets/instagram-icon.svg": "2ab6accc940b2f53f6743a60753de3d78dcc3580",
+    "/assets/light.png": "cb16afa905280d55d7db77bd5bd26fa8d6562bf9",
+    "/assets/light.svg": "cb16afa905280d55d7db77bd5bd26fa8d6562bf9",
+    "/assets/logo.svg": "d94f7419a97490b469030e543bac7c52b55382c1",
+    "/assets/plus.svg": "dff393ab1ea1b6b156961739aa9e791e90f78442",
+    "/assets/profile icon.svg": "965209d2a517f12c6319be1d45b7a0aca8b3e0d9",
+    "/assets/search icon.svg": "ba6d8c3a723a53b051eb540bd641162f2ebe20ea",
+    "/assets/search-dark.svg": "ca4c7e5f5ecde5ae713f519ecb103e1e1be05fbc",
+    "/assets/search.png": "23d1fad7734736c6b0b02a095772f8bea7866e36",
+    "/chunk-2L4HC7TM.js": "3aa9948bbb76e459ebe300fc730f4521347e33a8",
+    "/chunk-2PGODFM6.js": "8823a6193e4ddce922111d22c7c6e5f6b5307c1b",
+    "/chunk-334WTRCU.js": "5b0eddc3b58a3e8649eaa6ce37c4d416c0b7b015",
+    "/chunk-4L2OJJNK.js": "248616add7be46116ba838395aa5a17b0e7e61ee",
+    "/chunk-5B5U2PHM.js": "920c5d13db861b95551ac53727eef9533e0c29ba",
+    "/chunk-AKQCXYU3.js": "2ce2258d20616fc0cd8ba111c8263652bc8f0813",
+    "/chunk-G6BYGQ5Y.js": "0e358c7830d727fb69be125ba35ca7843ed07e2a",
+    "/chunk-MBLI5VBO.js": "71a0a548c60d4f5289c4c87a4671102c717d9730",
+    "/chunk-MXNHHFO3.js": "4ae0e096b542c2d646d93b333fb9e3bf265e74c3",
+    "/chunk-PICXG2UD.js": "a7b827d5b3cd6b897a5d38b0c64fe1608b4ac094",
+    "/chunk-VTS4KZSW.js": "02e4ccf490d616ac18efef50999de4396d9cdf0a",
+    "/chunk-W5N3VN3L.js": "847f7423c8467eb7644d97818bcdc2186a273f15",
+    "/chunk-WIW73NSP.js": "7ea5731bab1377144621071ca785d11f95e2cb1b",
+    "/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/index.html": "155b446aa8e5c6370be74dce4ef921efd449fc31",
+    "/main-DM44BLCX.js": "d19d46d0b2b0c04c7376dfacecd6eff12b557a3c",
+    "/manifest.webmanifest": "73061f107d022e0ff14c7385756d37442903060c",
+    "/polyfills-RT5I6R6G.js": "fe9f024576f21ff6314cf8f8332cde58b9a12416",
+    "/styles-NB7EZSNP.css": "c445ecd6b6ebe20583f01d0b92460921e72440cf"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
