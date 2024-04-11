@@ -20,13 +20,13 @@
         <div class="pt-3">
             <mat-accordion>
                 <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false" *ngFor="let item of posts">
+                       (closed)="panelOpenState = false" *ngFor="let item of posts; let i = index">
                     <mat-expansion-panel-header>
                         <!-- <mat-panel-title>
                             Post Title
                         </mat-panel-title> -->
                         <mat-panel-description>
-                            {{item.id}}. {{item.title}}
+                            {{i+1}}. {{item.title}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="flex flex-col gap-5 text-[1rem]">
@@ -53,12 +53,12 @@
                        <div class="w-full flex place-items-center">
                         <div class="w-[30%] text-[#FF046E] font-semibold">Action</div>
                         <div class="w-[70%] flex gap-10">
-                            <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete">
-                            <img class="w-[1.4rem]" src="../../../../assets/edit-icon.svg" alt="edit">
-                            <img class="w-[1.4rem]" src="../../../../assets/copy-icon.svg" alt="copy">
-                            <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post">
+                            <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete" (click)="deletePost(item.id)">
+                            <img class="w-[1.2rem]" src="../../../../assets/edit-icon.svg" alt="edit" (click)="goToEditPost(item)">
+                            <img class="w-[1.5rem]" src="../../../../assets/copy-icon.svg" alt="copy" (click)="copyToClipboard(item.url)">
+                            <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post" (click)="goToInstagramPost(item.url)">
                         </div>
-                       </div>
+                         </div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

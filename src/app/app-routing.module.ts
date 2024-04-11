@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: '' , loadChildren: ()=> import('./components/forgot-pass/forgot-pass.module').then(m => m.ForgotPassModule)},
   {path: '' , loadChildren: ()=> import('./components/email-verification/email-verification.module').then(m => m.EmailVerificationModule)},
   {path: '' , loadChildren: ()=> import('./components/home-page/home-page.module').then(m => m.HomePageModule)},
+  {path: '' , loadChildren: ()=> import('./components/edit-post/edit-post.module').then(m => m.EditPostModule)},
 ];
 
 @NgModule({

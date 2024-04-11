@@ -1,23 +1,23 @@
 <div class="custom-gradient w-full h-full font-sans overflow-hidden">
     <div class="w-full h-[10%] flex place-items-center justify-between px-5">
-        <img class="w-[1.2rem] cursor-pointer" (click)="goToWelcome()" src="../../../../../assets/back-arrow-white.svg" alt="back-btn">
+        <img class="w-[1.2rem] cursor-pointer" (click)="goToHome()" src="../../../../assets/back-arrow-white.svg" alt="back-btn">
     </div>
     <div class="w-full h-[10%]">
         <div class="text-white font-semibold text-[1.8rem] px-5 py-3">Add New Post</div>
     </div>
     <div class="bg-white w-full h-[85%] rounded-t-[2rem] px-8 py-12 flex flex-col gap-3 pt-6">
-        <input type="text" placeholder="Paste Post URL here" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none">
-        <input type="text" placeholder="Title" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none">
+        <input type="text" [(ngModel)]="obj.url" placeholder="Paste Post URL here" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none">
+        <input type="text" [(ngModel)]="obj.title" placeholder="Title" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none">
         <div class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none">
-            <select class="border-none w-full bg-transparent text-[1rem] font-semibold text-[#AEAEAE]">
+            <select (change)="selectedCategory($event)" class="border-none w-full bg-transparent text-[1rem] font-semibold text-[#AEAEAE]">
                 <option value="" disabled selected>Category</option>
-                <option value="tech">Tech</option>
-                <option value="ai">AI</option>
-                <option value="love">Love</option>
+                <option value="Tech">Tech</option>
+                <option value="AI">AI</option>
+                <option value="Love">Love</option>
             </select>
         </div>
-        <input type="text" placeholder="Keywords" class="px-7 py-5 text-[1rem] rounded-full focus:outline-none font-semibold w-full border-none bg-[#EEEEEE]">
-        <textarea class="px-7 py-5 text-[1rem] rounded-[2rem] font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none" cols="30" rows="8" placeholder="Notes, If any..."></textarea>
-        <button class="bg-black text-white text-[1rem] font-semibold w-full p-5 rounded-full cursor-pointer" (click)="goToWelcome()">Add Post</button>
+        <input [(ngModel)]="obj.keywords" type="text" placeholder="Keywords" class="px-7 py-5 text-[1rem] rounded-full focus:outline-none font-semibold w-full border-none bg-[#EEEEEE]">
+        <textarea [(ngModel)]="obj.notes" class="px-7 py-5 text-[1rem] rounded-[2rem] font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none" cols="30" rows="8" placeholder="Notes, If any..."></textarea>
+        <button class="bg-black text-white text-[1rem] font-semibold w-full p-5 rounded-full cursor-pointer" (click)="goToHome()">Add Post</button>
     </div>
 </div>

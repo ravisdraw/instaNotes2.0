@@ -15,6 +15,7 @@ import { HomePageComponent } from './home-page/home-page/home-page.component';
 import { HomePageModule } from './home-page/home-page.module';
 import { AddPostComponent } from './add-post/add-post/add-post.component';
 import { AddPostModule } from './add-post/add-post.module';
+import { EditPostModule } from '././edit-post/edit-post.module'
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { AddPostModule } from './add-post/add-post.module';
     ForgotPassModule,
     EmailVerificationModule,
     HomePageModule,
-    AddPostModule
-  ]
+    AddPostModule,
+    EditPostModule
+  ],
 })
 export class ComponentsModule {}

@@ -8,14 +8,10 @@ import { Router } from '@angular/router';
 })
 export class WelcomePageComponent implements OnInit{
 
-  isWelcomeLoaded: boolean = true;
-
   constructor( private router: Router) {};
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.isWelcomeLoaded = false;
-    }, 2000); 
+   
   }
   
 

@@ -6,6 +6,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 
 @NgModule({
@@ -14,7 +16,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     CommonModule,
     HomePageRoutingModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ClipboardModule
   ]
 })
 export class HomePageModule { }

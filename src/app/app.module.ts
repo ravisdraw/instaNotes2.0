@@ -26,7 +26,7 @@ import { ComponentsModule } from './components/components.module';
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
+    // MainPageComponent,
   ],
   imports: [
     BrowserModule,
