@@ -1,13 +1,18 @@
-<div class="custom-gradient w-full h-full font-sans overflow-hidden">
-    <div class="w-full h-[10%] flex place-items-center justify-between px-5">
+<div class="custom-gradient w-full h-full font-sans overflow-hidden lg:flex lg:relative">
+    <div class="lg:absolute hidden lg:flex w-[70%] h-[20rem] top-[20%] flex-col items-center justify-center gap-10">
+        <img class="w-[10rem]" src="../../../../../assets/logo-white.svg" alt="logo">
+        <div class="text-[1.3rem] w-[40rem]  text-center text-white px-5 py-3 leading-7">Unlock the magic of InstaNotes! Sign in to xplore your personalized space</div>
+    </div>
+    <div class="w-full h-[10%] flex place-items-center justify-between px-5 lg:w-[70%]">
         <img class="w-[1.2rem] cursor-pointer" (click)="goToWelcome()" src="../../../../../assets/back-arrow-white.svg" alt="back-btn">
         <div class="text-white text-[1rem] font-medium cursor-pointer" (click)="goToSignUp()">Sign Up</div>
     </div>
-    <div class="w-full h-[20%]">
+    <div class="w-full h-[20%] lg:hidden">
         <div class="text-white font-semibold text-[1.8rem] px-5 py-3">Sign In</div>
         <div class="text-[1.2rem] text-white px-5 py-3 leading-7">Unlock the magic of InstaNotes! Sign in to xplore your personalized space</div>
     </div>
-    <div class="bg-white w-full h-[70%] rounded-t-[2rem] px-8 py-12 flex flex-col gap-3 pt-6">
+    <div class="bg-white w-full h-[70%] rounded-t-[2rem] px-8 py-12 flex flex-col gap-3 pt-6 lg:h-full lg:rounded-none lg:w-[30%] lg:justify-center lg:items-center">
+        <div class="hidden lg:block text-[1.5rem] text-black font-semibold text-center pb-8">Sign in</div>
         <input type="text" placeholder="Username" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none">
         <input type="password" placeholder="Password" class="px-7 py-5 text-[1rem] rounded-full focus:outline-none font-semibold w-full border-none bg-[#EEEEEE]">
         <div class="text-[1rem] text-[#616161] font-semibold self-end pb-2" (click)="goToForgotPass()">Forgot Password?</div>

@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
 })
 export class WelcomeLoadingPageComponent implements OnInit {
 
+  navigationComplete = false;
   constructor( private router : Router) {};
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.goToWelcomePage();
+      this.router.navigate(['/welcome-page'])
     }, 2000); 
   }
 
-  goToWelcomePage() {
-    this.router.navigate(['/welcome-page'])
-  }
+  
+
   
 }

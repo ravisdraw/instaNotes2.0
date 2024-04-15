@@ -15,7 +15,8 @@ import { HomePageComponent } from './home-page/home-page/home-page.component';
 import { HomePageModule } from './home-page/home-page.module';
 import { AddPostComponent } from './add-post/add-post/add-post.component';
 import { AddPostModule } from './add-post/add-post.module';
-import { EditPostModule } from '././edit-post/edit-post.module'
+import { EditPostModule } from '././edit-post/edit-post.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { EditPostModule } from '././edit-post/edit-post.module'
     EmailVerificationModule,
     HomePageModule,
     AddPostModule,
-    EditPostModule
+    EditPostModule,
+    ReactiveFormsModule
   ],
 })
 export class ComponentsModule {}

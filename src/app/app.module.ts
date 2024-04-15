@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, importProvidersFrom, isDevMode } from '@angular/core';
 import {
   BrowserModule,
   provideClientHydration,
@@ -21,7 +21,11 @@ import { WelcomePageComponent } from './components/sign-in/welcome-page/welcome-
 import { WelcomeLoadingPageComponent } from './components/sign-in/welcome-loading-page/welcome-loading-page.component';
 import { SignInComponent } from './components/sign-in/sign-in/sign-in/sign-in.component';
 import { ComponentsModule } from './components/components.module';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from './environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,9 +47,17 @@ import { ComponentsModule } from './components/components.module';
     MatDividerModule,
     MatCardModule,
 
-    ComponentsModule
+    ComponentsModule,
   ],
-  providers: [provideClientHydration()],
+  providers: [
+    provideClientHydration(),
+    importProvidersFrom([
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule,
+      AngularFireDatabaseModule,
+      AngularFirestoreModule,
+    ]),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

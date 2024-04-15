@@ -1,67 +1,114 @@
-<div class="w-full h-full p-3 select-none">
-    <div class="w-full h-[20%] flex flex-col justify-between">
-        <div class="w-full h-[50%] flex justify-between place-items-center gap-3 relative">
-            <img src="../../../../assets/profile icon.svg" alt="profile-icon">
-            <img class="absolute left-[8rem]" src="../../../../assets/search icon.svg" alt="search-mob" *ngIf="searchText===''">
-            <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText">
-            <img src="../../../../assets/filter-icon.svg" alt="filter">
+<div class="w-screen h-screen flex">
+    <div class="w-full h-full p-3 select-none lg:w-[70%]">
+        <div class="w-full h-[20%] flex flex-col justify-between">
+            <div class="w-full h-[50%] flex justify-between place-items-center gap-3 relative">
+                <img src="../../../../assets/profile icon.svg" alt="profile-icon">
+                <img class="absolute left-[8rem]" src="../../../../assets/search icon.svg" alt="search-mob" *ngIf="searchText===''">
+                <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText">
+                <img src="../../../../assets/filter-icon.svg" alt="filter">
+            </div>
+            <button class="bg-black border-none text-white text-[1rem] font-semibold w-full p-5 py-4 rounded-full cursor-pointer" [ngClass]="myForm.dirty ? 'bg-red-500' : 'bg-black' " (click)="goToAddPost()" >{{myForm.dirty ? 'Save Edited Post' : 'Add New Post'}}</button>
         </div>
-        <button class="bg-[#FF046E] text-white text-[1rem] font-semibold w-full p-5 py-4 rounded-full cursor-pointer" (click)="goToAddPost()" >ADD NEW</button>
-    </div>
-    <div class="bw-full h-[80%]  overflow-y-scroll">
-        <div class="w-full pt-3 shadow-md">
-            <select name="category" class="w-full h-[3rem] text-[1rem] text-black border-none rounded-none bg-white focus:outline-none font-semibold">
-                <option value="" disabled selected>Category</option>
-                <option value="tech">Tech</option>
-                <option value="ai">AI</option>
-                <option value="love">Love</option>
-            </select>
-        </div>
-        <div class="pt-3">
-            <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false" *ngFor="let item of posts; let i = index">
-                    <mat-expansion-panel-header>
-                        <!-- <mat-panel-title>
-                            Post Title
-                        </mat-panel-title> -->
-                        <mat-panel-description>
-                            {{i+1}}. {{item.title}}
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <div class="flex flex-col gap-5 text-[1rem]">
-                       <div class="w-full flex place-items-center">
-                        <div class="w-[30%] text-[#FF046E] font-semibold">Title</div>
-                        <div class="w-[70%]">{{item.title}}</div>
-                       </div>
-
-                       <div class="w-full flex place-items-center">
-                        <div class="w-[30%] text-[#FF046E] font-semibold">Category</div>
-                        <div class="w-[70%]">{{item.category}}</div>
-                       </div>
-
-                       <div class="w-full flex place-items-center">
-                        <div class="w-[30%] text-[#FF046E] font-semibold">Keywords</div>
-                        <div class="w-[70%]">{{item.keywords}}</div>
-                       </div>
-
-                       <div class="w-full flex place-items-center">
-                        <div class="w-[30%] text-[#FF046E] font-semibold">Notes</div>
-                        <div class="w-[70%]">{{item.notes}}</div>
-                       </div>
-
-                       <div class="w-full flex place-items-center">
-                        <div class="w-[30%] text-[#FF046E] font-semibold">Action</div>
-                        <div class="w-[70%] flex gap-10">
-                            <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete" (click)="deletePost(item.id)">
-                            <img class="w-[1.2rem]" src="../../../../assets/edit-icon.svg" alt="edit" (click)="goToEditPost(item)">
-                            <img class="w-[1.5rem]" src="../../../../assets/copy-icon.svg" alt="copy" (click)="copyToClipboard(item.url)">
-                            <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post" (click)="goToInstagramPost(item.url)">
+        <div class="bw-full h-[80%]  overflow-y-scroll">
+            <div class="w-full pt-3 shadow-md lg:flex lg:gap-5 lg:items-center">
+                <select name="category" class="w-full lg:w-[8rem] h-[3rem] text-[1rem] text-black border-none rounded-none bg-white focus:outline-none font-semibold">
+                    <option value="" disabled selected>Category</option>
+                    <option value="tech">Tech</option>
+                    <option value="ai">AI</option>
+                    <option value="love">Love</option>
+                </select>
+                <div class="hidden lg:flex gap-2">
+                    <button class="px-3 py-2 text-[1rem] border-none rounded-sm" *ngFor="let item of filters">{{item}}</button>
+                </div>
+            </div>
+            <form [formGroup]="myForm"  class="pt-3">
+                <mat-accordion formArrayName="items">
+                    <mat-expansion-panel (opened)="showInstagramPost(item.id)"
+                           (closed)="panelOpenState = false" *ngFor="let item of posts; let i = index">
+                        <mat-expansion-panel-header>
+                            <!-- <mat-panel-title>
+                                Post Title
+                            </mat-panel-title> -->
+                            <mat-panel-description>
+                                {{i+1}}. {{item.title}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div [formGroupName]="i" class="flex flex-col gap-5 text-[1rem]">
+                           <div class="w-full flex place-items-center">
+                            <div class="w-[30%] text-[#FF046E] font-semibold">Title</div>
+                            <div class="w-[70%]"><input formControlName="title" type="text" class="outline-none border-none rounded-full bg-gray-100 p-[10px]" [readOnly]="!editMode" [value]="item.title"></div>
+                           </div>
+    
+                           <div class="w-full flex place-items-center">
+                            <div class="w-[30%] text-[#FF046E] font-semibold">Category</div>
+                            <div class="w-[70%]"><input formControlName="category" type="text" class="outline-none border-none rounded-full bg-gray-100 p-[10px]" [readOnly]="!editMode" [value]="item.category"></div>
+                           </div>
+    
+                           <div class="w-full flex place-items-center">
+                            <div class="w-[30%] text-[#FF046E] font-semibold">Keywords</div>
+                            <div class="w-[70%]"><input formControlName="keywords" type="text" class="outline-none border-none rounded-full bg-gray-100 p-[10px]" [readOnly]="!editMode" [value]="item.keywords"></div>
+                           </div>
+    
+                           <div class="w-full flex place-items-center">
+                            <div class="w-[30%] text-[#FF046E] font-semibold">Notes</div>
+                            <div class="w-[70%]"><input formControlName="note" type="text" class="outline-none border-none rounded-full bg-gray-100 p-[10px]" [readOnly]="!editMode" [value]="item.note"></div>
+                           </div>
+    
+                           <div class="w-full flex place-items-center">
+                            <div class="w-[30%] text-[#FF046E] font-semibold">Action</div>
+                            <div class="w-[70%] flex gap-10">
+                                <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete" title="Delete" (click)="deletePost(item.id)">
+                                <img class="w-[1.2rem]" src="../../../../assets/edit-icon.svg" alt="edit" title="Edit" (click)="goToEditPost(item)">
+                                <img class="w-[1.5rem]" src="../../../../assets/copy-icon.svg" alt="copy" title="Copy URL" (click)="copyToClipboard(item.url)">
+                                <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post" title="View" (click)="goToInstagramPost(item.url)">
+                                <div class="hidden lg:flex gap-3 self-end">
+                                    <label>Collection Id:</label>
+                                    <input formControlName="collectionId" readonly type="text" class="w-[15rem] outline-none border-none" [value]="item.collectionId">
+                                </div>
+                            </div>
+                             </div>
                         </div>
-                         </div>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </form>
         </div>
+    </div>
+       <!--Right Container-->
+    <div class="bg-white h-full w-[30%] p-3 pl-0 dark:bg-black hidden lg:block">
+    <div
+        class="custom-gradient h-full w-full flex place-items-center justify-center text-[25px] text-white font-josefin font-semibold"
+        *ngIf="instaID === ''"
+    >
+        No Post Available!
+    </div>
+    <div class="h-full w-full" *ngIf="instaID !== ''">
+        <iframe
+        class="h-full instagram-media instagram-media-rendered"
+        id="instagram-embed-0"
+        [src]="instaUrl"
+        allowtransparency="true"
+        allowfullscreen="true"
+        frameborder="0"
+        height="612"
+        data-instgrm-payload-id="instagram-media-payload-0"
+        scrolling="no"
+        style="
+            background: white;
+            max-width: 540px;
+            width: calc(100% - 2px);
+            border-radius: 3px;
+            border: 1px solid rgb(219, 219, 219);
+            box-shadow: none;
+            display: block;
+            margin: 0px 0px 12px;
+            min-width: 256px;
+            padding: 0px;
+        "
+        ></iframe>
+        <script async src="//www.instagram.com/embed.js"></script>
+    </div>
     </div>
 </div>
+
+
+  

@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ClipboardModule } from 'ngx-clipboard';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     HomePageRoutingModule,
     FormsModule,
     MatExpansionModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ]
 })
 export class HomePageModule { }
