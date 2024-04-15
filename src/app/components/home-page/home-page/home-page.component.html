@@ -59,8 +59,8 @@
                             <div class="w-[70%] flex gap-10">
                                 <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete" title="Delete" (click)="deletePost(item.id)">
                                 <img class="w-[1.2rem]" src="../../../../assets/edit-icon.svg" alt="edit" title="Edit" (click)="goToEditPost(item)">
-                                <img class="w-[1.5rem]" src="../../../../assets/copy-icon.svg" alt="copy" title="Copy URL" (click)="copyToClipboard(item.url)">
-                                <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post" title="View" (click)="goToInstagramPost(item.url)">
+                                <img class="w-[1.5rem]" src="../../../../assets/copy-icon.svg" alt="copy" title="Copy URL" (click)="copyToClipboard(item?.url)">
+                                <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post" title="View" (click)="goToInstagramPost(item?.url)">
                                 <div class="hidden lg:flex gap-3 self-end">
                                     <label>Collection Id:</label>
                                     <input formControlName="collectionId" readonly type="text" class="w-[15rem] outline-none border-none" [value]="item.collectionId">
