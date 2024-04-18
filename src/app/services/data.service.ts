@@ -6,7 +6,6 @@ import {
   DocumentReference,
 } from '@angular/fire/compat/firestore';
 import { addDoc, collection } from 'firebase/firestore';
-import { error } from 'console';
 
 @Injectable({
   providedIn: 'root',

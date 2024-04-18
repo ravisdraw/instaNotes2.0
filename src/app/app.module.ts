@@ -17,15 +17,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { WelcomePageComponent } from './components/sign-in/welcome-page/welcome-page/welcome-page.component';
-import { WelcomeLoadingPageComponent } from './components/sign-in/welcome-loading-page/welcome-loading-page.component';
-import { SignInComponent } from './components/sign-in/sign-in/sign-in/sign-in.component';
 import { ComponentsModule } from './components/components.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { environment } from './environments/environment';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyD_rf2KIA-TecD7MwuC27R8M8AD5lYz0_M',
+  authDomain: 'insta-notes-a1fe7.firebaseapp.com',
+  projectId: 'insta-notes-a1fe7',
+  storageBucket: 'insta-notes-a1fe7.appspot.com',
+  messagingSenderId: '189198892043',
+  appId: '1:189198892043:web:87f78593206b270a981b0e',
+}
 
 @NgModule({
   declarations: [
@@ -52,7 +57,7 @@ import { environment } from './environments/environment';
   providers: [
     provideClientHydration(),
     importProvidersFrom([
-      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireModule.initializeApp(firebaseConfig),
       AngularFireAuthModule,
       AngularFireDatabaseModule,
       AngularFirestoreModule,

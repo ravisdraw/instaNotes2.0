@@ -5,7 +5,6 @@
 
 .mat-expansion-panel-header-description {
    color: black;
-   /* font-weight : bold; */
    font-size: 1rem;
 }
 
@@ -26,18 +25,16 @@
    color: white;
 }
 
-/* Custom scrollbar styling */
- /* For Webkit based browsers */
  ::-webkit-scrollbar {
-   width: 8px; /* Width of the scrollbar */
+   width: 8px; 
  }
 
  ::-webkit-scrollbar-track {
-   background: white /* Gradient background */
-   border-radius: 10px; /* Rounded corners */
+   background: white;
+   border-radius: 10px;
  }
 
  ::-webkit-scrollbar-thumb {
-   background: linear-gradient(to bottom, #FF046E, #9804A4, #0500F0); /* Color of the scrollbar thumb */
-   border-radius: 10px; /* Rounded corners */
+   background: linear-gradient(to bottom, #FF046E, #9804A4, #0500F0); 
+   border-radius: 10px;
  }

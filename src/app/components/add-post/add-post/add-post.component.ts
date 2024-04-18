@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { log } from 'console';
 
 @Component({
   selector: 'app-add-post',
@@ -24,8 +23,8 @@ export class AddPostComponent {
   }
 
   selectedCategory(event:any) {
-    let val = event.target.value;
-    this.obj.category = val;
+    let value = event.target.value;
+    this.obj.category = value;
   }
 
 

@@ -3,10 +3,8 @@ import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../services/data.service';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { error, log } from 'console';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
