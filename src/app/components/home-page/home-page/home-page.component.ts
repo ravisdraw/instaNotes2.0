@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../services/data.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home-page',
@@ -52,7 +54,8 @@ export class HomePageComponent implements OnInit {
     private route: ActivatedRoute,
     private dataService: DataService,
     private sanitizer: DomSanitizer,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +67,14 @@ export class HomePageComponent implements OnInit {
     });
     this.getMasterList();
     this.createForm();
+  }
+
+  showSuccess(message: string): void {
+    this.toastr.success(message, 'Success');
+  }
+
+  showError(message: string): void {
+    this.toastr.error(message, 'Error');
   }
 
   createForm() {
@@ -97,15 +108,6 @@ export class HomePageComponent implements OnInit {
   }
 
   getMasterList() {
-    // this.dataService.getMasterList()?.snapshotChanges().subscribe({
-    //   next: (data:any) => {
-    //    let collection =  data.map((item:any) =>
-    //       Object.assign({id : item.payload.doc.id}, item.payload.doc.data())
-    //     );
-    //     console.log(collection);
-    //   }
-
-    // })
     this.dataService
       .getMasterListStartingFromIndex(0, 2)
       .subscribe((item: any) => {
@@ -154,10 +156,11 @@ export class HomePageComponent implements OnInit {
     this.dataService
       .updateDocument(obj.collId, updateObj[0])
       .then(() => {
-        console.log('Post updated Successfully');
+        this.showSuccess('Post updated Successfully')
+        this.myForm.markAsPristine();
       })
       .catch((error) => {
-        console.log('Failed to update');
+        this.showError(error);
       });
   }
 
@@ -188,5 +191,30 @@ export class HomePageComponent implements OnInit {
   }
   deletePost(id: string) {
     this.posts = this.posts.filter((item) => item.id !== id);
+  }
+
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
+
+  pageEvent: PageEvent | undefined;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
   }
 }

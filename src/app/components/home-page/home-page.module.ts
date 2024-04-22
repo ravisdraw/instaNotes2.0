@@ -9,6 +9,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [HomePageComponent],
@@ -18,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatExpansionModule,
     ClipboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule
   ]
 })
 export class HomePageModule { }

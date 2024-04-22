@@ -38,3 +38,7 @@
    background: linear-gradient(to bottom, #FF046E, #9804A4, #0500F0); 
    border-radius: 10px;
  }
+
+::ng-deep .mat-mdc-paginator-outer-container {
+   font-size: 15px;
+}

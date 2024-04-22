@@ -23,6 +23,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
+import { ToastrModule, provideToastr } from 'ngx-toastr';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyD_rf2KIA-TecD7MwuC27R8M8AD5lYz0_M',
   authDomain: 'insta-notes-a1fe7.firebaseapp.com',
@@ -42,6 +44,12 @@ const firebaseConfig = {
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      closeButton: true,
+      progressBar: true,
+      positionClass: 'toast-top-right'
+    }),
     FormsModule,
 
     MatDialogModule,
