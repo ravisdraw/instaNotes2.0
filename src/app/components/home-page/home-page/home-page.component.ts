@@ -20,7 +20,37 @@ export class HomePageComponent implements OnInit {
   editMode: boolean = false;
   robots: any;
 
-  filters: any[] = ['AI', 'Tech', 'Love'];
+  totalCount = 0;
+
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
+
+  pageEvent: PageEvent | undefined;
+
+  filters: any[] = [
+    'Coding',
+    'Dream',
+    'Food',
+    'Love',
+    'Motivation',
+    'Outfit',
+    'Photography',
+    'Songs',
+    'Tech',
+    'ToBuy',
+    'Trading',
+    'Travel',
+    'UI',
+  ];
+
+  selectedCategory: string = '';
 
   posts: any[] = [
     // {
@@ -65,8 +95,21 @@ export class HomePageComponent implements OnInit {
         this.posts.push(this.receivedData);
       }
     });
-    this.getMasterList();
+    this.getMasterList(this.pageIndex, this.pageSize);
     this.createForm();
+    this.getMasterListSize();
+  }
+
+  searchPost() {
+    this.instaID = '';
+  }
+
+  getMasterListSize() {
+    let count = this.dataService.getMasterListCount();
+    count.then((data) => {
+      this.totalCount = data;
+      this.length = this.totalCount;
+    });
   }
 
   showSuccess(message: string): void {
@@ -75,6 +118,10 @@ export class HomePageComponent implements OnInit {
 
   showError(message: string): void {
     this.toastr.error(message, 'Error');
+  }
+
+  showWarning(message: string): void {
+    this.toastr.warning(message, 'Warning');
   }
 
   createForm() {
@@ -107,9 +154,11 @@ export class HomePageComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  getMasterList() {
+  getMasterList(startIndex: number, endIndex: number) {
+    this.posts = [];
+    this.createForm();
     this.dataService
-      .getMasterListStartingFromIndex(0, 2)
+      .getMasterListStartingFromIndex(startIndex, endIndex)
       .subscribe((item: any) => {
         item.forEach((post: any) => {
           this.posts.push(post);
@@ -117,6 +166,29 @@ export class HomePageComponent implements OnInit {
         });
         // console.log(this.myForm);
       });
+  }
+
+  getCategoryList(startIndex: number, range: number, item: string) {
+    this.posts = [];
+    this.createForm();
+    this.dataService
+      .getMasterListByCategory(startIndex, range, item)
+      .subscribe((item: any) => {
+        item.forEach((post: any) => {
+          this.posts.push(post);
+          this.addItem(post);
+        });
+        // console.log(this.myForm);
+      });
+  }
+
+  getCategory(item: string) {
+    this.selectedCategory = item;
+    this.dataService.getCategoryCount(item).then((data) => {
+      this.totalCount = data;
+      this.length = this.totalCount;
+      this.getCategoryList(this.pageIndex, this.pageSize, item);
+    });
   }
 
   goToAddPost() {
@@ -156,7 +228,7 @@ export class HomePageComponent implements OnInit {
     this.dataService
       .updateDocument(obj.collId, updateObj[0])
       .then(() => {
-        this.showSuccess('Post updated Successfully')
+        this.showSuccess('Post updated Successfully');
         this.myForm.markAsPristine();
       })
       .catch((error) => {
@@ -165,9 +237,7 @@ export class HomePageComponent implements OnInit {
   }
 
   addPost() {
-    this.dataService
-    .addData();
-    
+    this.dataService.addData();
   }
 
   goToInstagramPost(url: string) {
@@ -189,32 +259,30 @@ export class HomePageComponent implements OnInit {
     this.clipboardService.copy(url);
     alert('Post URL Copied to Clipboard!');
   }
-  deletePost(id: string) {
-    this.posts = this.posts.filter((item) => item.id !== id);
+  deletePost(collId: string) {
+    this.posts = this.posts.filter((item) => item.collectionId !== collId);
+    this.dataService.deletePost(collId);
+    this.showWarning('Post Deleted!');
   }
-
-  length = 50;
-  pageSize = 10;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 25];
-
-  hidePageSize = false;
-  showPageSizeOptions = true;
-  showFirstLastButtons = true;
-  disabled = false;
-
-  pageEvent: PageEvent | undefined;
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
+    let startIndex = this.pageSize * this.pageIndex;
+    if (this.selectedCategory === '') {
+      this.getMasterList(startIndex, this.pageSize);
+    } else {
+      this.getCategoryList(startIndex, this.pageSize, this.selectedCategory);
+    }
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.pageSizeOptions = setPageSizeOptionsInput
+        .split(',')
+        .map((str) => +str);
     }
   }
 }

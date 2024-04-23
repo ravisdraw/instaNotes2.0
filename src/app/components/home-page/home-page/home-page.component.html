@@ -4,21 +4,21 @@
             <div class="w-full h-[50%] flex justify-between place-items-center gap-3 relative">
                 <img src="../../../../assets/profile icon.svg" alt="profile-icon">
                 <img class="absolute left-[8rem]" src="../../../../assets/search icon.svg" alt="search-mob" *ngIf="searchText===''">
-                <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText">
+                <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText" (click)="searchPost()">
                 <img src="../../../../assets/filter-icon.svg" alt="filter">
             </div>
             <button class="bg-black border-none text-white text-[1rem] font-semibold w-full p-5 py-4 rounded-full cursor-pointer" [ngClass]="myForm.dirty ? 'bg-red-500' : 'bg-black' " (click)="goToAddPost()" >{{myForm.dirty ? 'Save Edited Post' : 'Add New Post'}}</button>
         </div>
         <div class="bw-full h-[80%]  overflow-y-scroll">
             <div class="w-full pt-3 shadow-md lg:flex lg:gap-5 lg:items-center">
-                <select name="category" class="w-full lg:w-[8rem] h-[3rem] text-[1rem] text-black border-none rounded-none bg-white focus:outline-none font-semibold">
+                <!-- <select name="category" class="w-full lg:w-[8rem] h-[3rem] text-[1rem] text-black border-none rounded-none bg-white focus:outline-none font-semibold">
                     <option value="" disabled selected>Category</option>
                     <option value="tech">Tech</option>
                     <option value="ai">AI</option>
                     <option value="love">Love</option>
-                </select>
-                <div class="hidden lg:flex gap-2">
-                    <button class="px-3 py-2 text-[1rem] border-none rounded-sm" *ngFor="let item of filters">{{item}}</button>
+                </select> -->
+                <div class="hidden lg:flex gap-2 ml-2">
+                    <button class="px-3 py-2 text-[1rem] border-none rounded-sm" *ngFor="let item of filters" (click)="getCategory(item)">{{item}}</button>
                 </div>
             </div>
             <form [formGroup]="myForm"  class="pt-3 h-[80%] overflow-y-auto">
@@ -30,7 +30,7 @@
                                 Post Title
                             </mat-panel-title> -->
                             <mat-panel-description>
-                                {{i+1}}. {{item?.title}}
+                                {{pageIndex*pageSize+(i+1)}}. {{item?.title}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div [formGroupName]="i" class="flex flex-col gap-5 text-[1rem]">
@@ -57,7 +57,7 @@
                            <div class="w-full flex place-items-center">
                             <div class="w-[30%] text-[#FF046E] font-semibold">Action</div>
                             <div class="w-[70%] flex gap-10">
-                                <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete" title="Delete" (click)="deletePost(item?.id)">
+                                <img class="w-[1.4rem]" src="../../../../assets/delete-icon.svg" alt="delete" title="Delete" (click)="deletePost(item?.collectionId)">
                                 <img class="w-[1.2rem]" src="../../../../assets/edit-icon.svg" alt="edit" title="Edit" (click)="goToEditPost(item)">
                                 <img class="w-[1.5rem]" src="../../../../assets/copy-icon.svg" alt="copy" title="Copy URL" (click)="copyToClipboard(item?.url)">
                                 <img class="w-[1.4rem]" src="../../../../assets/instagram-icon.svg" alt="post" title="View" (click)="goToInstagramPost(item?.url)">
@@ -78,11 +78,11 @@
                [pageSize]="pageSize"
                [disabled]="disabled"
                [showFirstLastButtons]="showFirstLastButtons"
-               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+               [hidePageSize]="showPageSizeOptions ? pageSizeOptions : []"
                [hidePageSize]="hidePageSize"
                [pageIndex]="pageIndex"
                aria-label="Select page">
-</mat-paginator>
+            </mat-paginator>
         </div>
     </div>
        <!--Right Container-->

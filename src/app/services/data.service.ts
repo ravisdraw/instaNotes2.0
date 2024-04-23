@@ -5,7 +5,8 @@ import {
   AngularFirestoreCollection,
   DocumentReference,
 } from '@angular/fire/compat/firestore';
-import { addDoc, collection } from 'firebase/firestore';
+import { getCountFromServer, getFirestore, collection, query, where } from 'firebase/firestore';
+
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,25 @@ export class DataService {
   getMasterList() {
     // return this.masterRef;
     return this.masterRef?.doc('z9bHsNjPxAp2XNfUzaWD');
+  }
+
+  deletePost(collectionId:string) {
+    this.masterRef?.doc(collectionId).delete();
+  }
+
+  async getMasterListCount() {
+    const firestore = getFirestore();
+    const userCollectionReference = collection(firestore, "master");
+    const userCollectionSnapshot = await getCountFromServer(userCollectionReference);
+    return userCollectionSnapshot.data().count;
+  }
+
+  async getCategoryCount(category:string) {
+    const firestore = getFirestore();
+    const userCollectionReference = collection(firestore, "master");
+    const categoryQuery = query(userCollectionReference, where('category', '==', category));
+    const userCollectionSnapshot = await getCountFromServer(categoryQuery);
+    return userCollectionSnapshot.data().count;
   }
 
   // Fetch documents starting from a given index
@@ -46,6 +66,30 @@ export class DataService {
           });
     });
   }
+
+  getMasterListByCategory(startIndex: number, batchSize: number, category: string): Observable<any[]> {
+    return new Observable<any[]>((observer) => {
+      if (this.masterRef) {
+        this.masterRef.ref
+          .where('category', '==', category) // Filter documents where the 'category' field equals the provided category
+          .orderBy('__name__') // Order documents by their IDs (assuming IDs are auto-generated)
+          .startAt(startIndex.toString()) // Convert startIndex to a string
+          .limit(batchSize) // Limit the batch size
+          .get()
+          .then((querySnapshot) => {
+            const documents = querySnapshot.docs.map((doc) => {
+              return { collectionId: doc.id, ...doc.data() }; // Include document ID along with data
+            });
+            observer.next(documents);
+            observer.complete();
+          })
+          .catch((error) => {
+            observer.error(error);
+          });
+      }
+    });
+  }
+  
 
   updateDocument(documentId: string, newData: any): Promise<void> {
     const documentRef = this.firestore.collection('master').doc(documentId);
@@ -85,4 +129,5 @@ export class DataService {
     console.log(res.id);
     return res.id;
   }
+
 }
