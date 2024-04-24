@@ -5,7 +5,10 @@
                 <img src="../../../../assets/profile icon.svg" alt="profile-icon">
                 <img class="absolute left-[8rem]" src="../../../../assets/search icon.svg" alt="search-mob" *ngIf="searchText===''">
                 <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText" (click)="searchPost()">
-                <img src="../../../../assets/filter-icon.svg" alt="filter">
+                <img class="peer relative cursor-pointer" (click)="toggleFilter()" src="../../../../assets/filter-icon.svg" alt="filter">
+                <div class="rounded-md h-auto w-[23rem] custom-gradient shadow-lg absolute right-0 top-[4rem] origin-top-right p-10 flex flex-wrap align-middle gap-2" @onOff *ngIf="showFilter" >
+                    <button class="bg-white p-3 font-sans text-[0.8rem] rounded-md h-[2.5rem]" *ngFor="let key of filters">{{key}}</button>
+                </div>
             </div>
             <button class="bg-black border-none text-white text-[1rem] font-semibold w-full p-5 py-4 rounded-full cursor-pointer" [ngClass]="myForm.dirty ? 'bg-red-500' : 'bg-black' " (click)="goToAddPost()" >{{myForm.dirty ? 'Save Edited Post' : 'Add New Post'}}</button>
         </div>
@@ -18,7 +21,7 @@
                     <option value="love">Love</option>
                 </select> -->
                 <div class="hidden lg:flex gap-2 ml-2">
-                    <button class="px-3 py-2 text-[1rem] border-none rounded-sm" *ngFor="let item of filters" (click)="getCategory(item)">{{item}}</button>
+                    <button class="px-3 py-2 text-[1rem] border-none rounded-sm" *ngFor="let item of filters" [ngClass]="item == selectedCategory ? 'selectedCat': ''" (click)="getCategory(item)">{{item}}</button>
                 </div>
             </div>
             <form [formGroup]="myForm"  class="pt-3 h-[80%] overflow-y-auto">

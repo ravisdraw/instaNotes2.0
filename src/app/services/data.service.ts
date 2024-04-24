@@ -13,6 +13,7 @@ import { getCountFromServer, getFirestore, collection, query, where } from 'fire
 })
 export class DataService {
   masterRef: AngularFirestoreCollection<any> | undefined;
+  
   constructor(private firestore: AngularFirestore) {
     // this.masterRef = db.list(this.dbPath);
     this.masterRef = this.firestore.collection<any>('master');
@@ -44,14 +45,14 @@ export class DataService {
 
   // Fetch documents starting from a given index
   getMasterListStartingFromIndex(
-    startIndex: number,
+    startIndex: string,
     batchSize: number
   ): Observable<any[]> {
     return new Observable<any[]>((observer) => {
       if (this.masterRef)
         this.masterRef.ref
           .orderBy('__name__') // Order documents by their IDs (assuming IDs are auto-generated)
-          .startAt(startIndex.toString()) // Convert startIndex to a string
+          .startAfter(startIndex) // Convert startIndex to a string
           .limit(batchSize) // Limit the batch size
           .get()
           .then((querySnapshot) => {
@@ -67,13 +68,13 @@ export class DataService {
     });
   }
 
-  getMasterListByCategory(startIndex: number, batchSize: number, category: string): Observable<any[]> {
+  getMasterListByCategory(startIndex: string, batchSize: number, category: string): Observable<any[]> {
     return new Observable<any[]>((observer) => {
       if (this.masterRef) {
         this.masterRef.ref
           .where('category', '==', category) // Filter documents where the 'category' field equals the provided category
           .orderBy('__name__') // Order documents by their IDs (assuming IDs are auto-generated)
-          .startAt(startIndex.toString()) // Convert startIndex to a string
+          .startAfter(startIndex) // Convert startIndex to a string
           .limit(batchSize) // Limit the batch size
           .get()
           .then((querySnapshot) => {

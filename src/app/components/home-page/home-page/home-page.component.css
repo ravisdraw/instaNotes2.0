@@ -43,3 +43,7 @@
 ::ng-deep .mat-mdc-paginator-outer-container {
    font-size: 15px;
 }
+
+.selectedCat {
+   color:red;
+}
