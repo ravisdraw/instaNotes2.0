@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -129,6 +129,29 @@ export class DataService {
     const res = await this.firestore.collection('master').add(temp);
     console.log(res.id);
     return res.id;
+  }
+
+  getDocumentsByKeyword(keyword: string): Observable<any[]> {
+    return this.firestore.collection('master', ref => 
+      ref.where('keywords', 'array-contains', keyword)
+    ).valueChanges();
+  }
+
+  getDocumentsByTitle(title: string): Observable<any[]> {
+    const words = title.toLowerCase().split(' ');
+
+    // Create an array of observables, each performing a query for a single word
+    const queries = words.map(word =>
+      this.firestore.collection('master', ref =>
+        ref.where('title', 'array-contains', word)
+      ).valueChanges()
+    );
+  
+    // Combine the observables into a single observable using combineLatest
+    return combineLatest(queries).pipe(
+      // Flatten the array of arrays into a single array of documents
+      map((documentsArray: any[]) => documentsArray.reduce((acc: any | any[], val: any) => acc.concat(val), []))
+    );
   }
 
 }

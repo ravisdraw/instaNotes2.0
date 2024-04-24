@@ -10,10 +10,12 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ArrayToWordsPipe } from '../../pipes/array-to-words.pipe';
+import { WordsToArrayPipe } from '../../pipes/words-to-array.pipe';
 
 
 @NgModule({
-  declarations: [HomePageComponent],
+    declarations: [HomePageComponent, ArrayToWordsPipe,WordsToArrayPipe],
   imports: [
     CommonModule,
     HomePageRoutingModule,
@@ -21,7 +23,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatExpansionModule,
     ClipboardModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+  ],
+  providers : [
+    ArrayToWordsPipe,
+    WordsToArrayPipe
   ]
 })
 export class HomePageModule { }

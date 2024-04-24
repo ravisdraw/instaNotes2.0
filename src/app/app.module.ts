@@ -24,6 +24,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { ToastrModule, provideToastr } from 'ngx-toastr';
+import { ArrayToWordsPipe } from './pipes/array-to-words.pipe';
+import { WordsToArrayPipe } from './pipes/words-to-array.pipe';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD_rf2KIA-TecD7MwuC27R8M8AD5lYz0_M',
@@ -36,7 +38,7 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
     // MainPageComponent,
   ],
   imports: [

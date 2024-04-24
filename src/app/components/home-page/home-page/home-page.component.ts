@@ -7,7 +7,16 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PageEvent } from '@angular/material/paginator';
-import { trigger, state, transition, style, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  transition,
+  style,
+  animate,
+} from '@angular/animations';
+import { KeywordsService } from '../../../services/keywords.service';
+import { ArrayToWordsPipe } from '../../../pipes/array-to-words.pipe';
+import { WordsToArrayPipe } from '../../../pipes/words-to-array.pipe';
 
 @Component({
   selector: 'app-home-page',
@@ -16,21 +25,21 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
   animations: [
     trigger('onOff', [
       transition(':enter', [
-        style({transform: 'scale(0)', opacity: 0}),
-        animate('200ms', style({transform:  'scale(1) ', opacity: 1}))
+        style({ transform: 'scale(0)', opacity: 0 }),
+        animate('200ms', style({ transform: 'scale(1) ', opacity: 1 })),
       ]),
       transition(':leave', [
-        style({transform: 'scale(1)', opacity: 1}),
-        animate('200ms', style({transform: 'scale(0)', opacity: 0}))
-      ])
-    ])
- ]
+        style({ transform: 'scale(1)', opacity: 1 }),
+        animate('200ms', style({ transform: 'scale(0)', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class HomePageComponent implements OnInit {
   receivedData: any;
   searchText: string = '';
   panelOpenState: boolean = false;
-  editMode: boolean = false;
+  editMode: boolean = true;
   robots: any;
 
   totalCount = 0;
@@ -44,10 +53,13 @@ export class HomePageComponent implements OnInit {
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   disabled = false;
-  showFilter:boolean = false;
+  showFilter: boolean = false;
+
+  selectedKeyword: string = '';
 
   pageEvent: PageEvent | undefined;
   collectionHistory = ['0'];
+  avoidSearchRepeats: any[] = [];
 
   filters: any[] = [
     'Coding',
@@ -64,6 +76,8 @@ export class HomePageComponent implements OnInit {
     'Travel',
     'UI',
   ];
+
+  keywords: any[] = [];
 
   selectedCategory: string = '';
 
@@ -92,6 +106,7 @@ export class HomePageComponent implements OnInit {
 
   commonURL = 'https://www.instagram.com/p/Ctq5NkItF7A/embed/';
   myForm: FormGroup = new FormGroup({});
+  searchKeyword: string = '';
 
   constructor(
     private router: Router,
@@ -100,7 +115,10 @@ export class HomePageComponent implements OnInit {
     private dataService: DataService,
     private sanitizer: DomSanitizer,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private keywordService: KeywordsService,
+    private arrayToWords: ArrayToWordsPipe,
+    private wordToArray: WordsToArrayPipe
   ) {}
 
   ngOnInit(): void {
@@ -113,10 +131,44 @@ export class HomePageComponent implements OnInit {
     // this.getMasterList(this.collectionHistory[this.pageIndex], this.pageSize);
     this.createForm();
     // this.getMasterListSize();
+    this.getKeywordList();
+  }
+
+  getKeywordList() {
+    this.keywordService.getKeywordList().subscribe((data: any) => {
+      let keywordColl = data.data;
+      keywordColl.forEach((item: any) => {
+        this.keywords.push(item);
+      });
+    });
   }
 
   searchPost() {
     this.instaID = '';
+    this.showFilter = false;
+    this.posts = [];
+    this.createForm();
+    let lastItem = '';
+    this.showFilter = false;
+    this.dataService
+      .getDocumentsByTitle(this.searchText)
+      .subscribe((item: any) => {
+        if (item.length == 0) {
+          this.showWarning('No Data Found!');
+        } else {
+          this.toastr.clear();
+        }
+        item.forEach((post: any) => {
+          if (!this.avoidSearchRepeats.includes(post.collectionId)) {
+            this.avoidSearchRepeats.push(post.collectionId);
+            this.posts.push(post);
+            this.addItem(post);
+            lastItem = post.collectionId;
+          }
+        });
+        this.pageSize = item.length;
+        this.collectionHistory.push(lastItem);
+      });
   }
 
   getMasterListSize() {
@@ -151,7 +203,7 @@ export class HomePageComponent implements OnInit {
 
   addItem(obj: any) {
     const newItem = this.fb.group({
-      title: [obj.title],
+      title: [this.arrayToWords.transform(obj.title)],
       category: [obj.category],
       keywords: [obj.keywords],
       note: [obj.note],
@@ -204,6 +256,7 @@ export class HomePageComponent implements OnInit {
   }
 
   getCategory(item: string) {
+    this.pageSize = 10;
     this.collectionHistory = ['0'];
     this.selectedCategory = item;
     this.dataService.getCategoryCount(item).then((data) => {
@@ -247,7 +300,7 @@ export class HomePageComponent implements OnInit {
     let updateObj: any = this.posts.filter(
       (item: any) => item.collectionId === obj.collId
     );
-    updateObj[0].title = obj.title;
+    updateObj[0].title = this.wordToArray.transform(obj.title);
     updateObj[0].category = obj.category;
     updateObj[0].keywords = obj.keywords;
     updateObj[0].note = obj.note;
@@ -270,10 +323,11 @@ export class HomePageComponent implements OnInit {
     window.open(url, 'blank');
   }
 
-  showInstagramPost(id: string) {
+  showInstagramPost(id: string, category:string) {
     this.instaID = id;
     this.instaUrl = this.sanitizeUrl();
     this.panelOpenState = true;
+    this.selectedCategory = category;
   }
 
   goToEditPost(obj: any) {
@@ -320,5 +374,32 @@ export class HomePageComponent implements OnInit {
 
   toggleFilter() {
     this.showFilter = !this.showFilter;
+  }
+
+  searchByKeyword(key: string) {
+    this.posts = [];
+    this.createForm();
+    let lastItem = '';
+    this.showFilter = false;
+    this.selectedKeyword = key;
+    this.selectedCategory = '';
+    this.dataService.getDocumentsByKeyword(key).subscribe((item: any) => {
+      item.forEach((post: any) => {
+        this.posts.push(post);
+        this.addItem(post);
+        lastItem = post.collectionId;
+      });
+      this.collectionHistory.push(lastItem);
+    });
+  }
+
+  searchKeywordData() {
+    if (this.searchKeyword.trim() === '') {
+      return this.keywords;
+    } else {
+      return this.keywords.filter((item: any) => {
+        return item.includes(this.searchKeyword.toLowerCase());
+      });
+    }
   }
 }

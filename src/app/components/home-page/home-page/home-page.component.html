@@ -3,11 +3,18 @@
         <div class="w-full h-[20%] flex flex-col justify-between">
             <div class="w-full h-[50%] flex justify-between place-items-center gap-3 relative">
                 <img src="../../../../assets/profile icon.svg" alt="profile-icon">
-                <img class="absolute left-[8rem]" src="../../../../assets/search icon.svg" alt="search-mob" *ngIf="searchText===''">
-                <input type="text" placeholder="Search" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus: outline-none text-center" [(ngModel)]="searchText" (click)="searchPost()">
-                <img class="peer relative cursor-pointer" (click)="toggleFilter()" src="../../../../assets/filter-icon.svg" alt="filter">
-                <div class="rounded-md h-auto w-[23rem] custom-gradient shadow-lg absolute right-0 top-[4rem] origin-top-right p-10 flex flex-wrap align-middle gap-2" @onOff *ngIf="showFilter" >
-                    <button class="bg-white p-3 font-sans text-[0.8rem] rounded-md h-[2.5rem]" *ngFor="let key of filters">{{key}}</button>
+                <input type="text" placeholder="What's on your mind?" class="px-7 py-5 text-[1rem] rounded-full font-semibold w-full border-none bg-[#EEEEEE] focus:outline-none text-center placeholder:text-black" [(ngModel)]="searchText"(keyup.enter)="searchPost()" >
+                <button class="px-7 py-5 text-[1rem] text-white rounded-full font-semibold border-none custom-gradient active:scale-[0.95] drop-shadow-lg" (click)="searchPost()">
+                    <!-- <img src="../../../../assets/search icon.svg" alt="search-mob"> -->
+                    Search
+                </button>
+                <img class="peer relative cursor-pointer transition-all duration-200 hover:rotate-180 " (click)="toggleFilter()" src="../../../../assets/filter-icon.svg" title="filter" alt="filter">
+                <div class="z-30 font-sans rounded-md h-auto w-[23rem] custom-gradient shadow-lg absolute right-0 top-[4rem] origin-top-right p-[1.3rem] flex flex-col gap-[1rem] justify-center place-items-center" @onOff *ngIf="showFilter" >
+                    <div class="text-[1rem] text-white"><input class="p-2 bg-transparent text-white outline-none placeholder:text-white" [(ngModel)]="searchKeyword" type="text" placeholder="Search By Keywords"></div>
+                    <div class="flex flex-wrap align-middle gap-2">
+                        <button class="bg-white px-[1rem] py-[0.5rem] font-sans text-[0.8rem] rounded-md hover:text-red-400" *ngFor="let key of searchKeywordData()" (click)="searchByKeyword(key)">{{key}}</button>
+                    </div>
+                    
                 </div>
             </div>
             <button class="bg-black border-none text-white text-[1rem] font-semibold w-full p-5 py-4 rounded-full cursor-pointer" [ngClass]="myForm.dirty ? 'bg-red-500' : 'bg-black' " (click)="goToAddPost()" >{{myForm.dirty ? 'Save Edited Post' : 'Add New Post'}}</button>
@@ -26,20 +33,20 @@
             </div>
             <form [formGroup]="myForm"  class="pt-3 h-[80%] overflow-y-auto">
                 <mat-accordion formArrayName="items">
-                    <mat-expansion-panel (opened)="showInstagramPost(item?.id)"
+                    <mat-expansion-panel (opened)="showInstagramPost(item?.id, item?.category)"
                            (closed)="panelOpenState = false" *ngFor="let item of posts; let i = index">
                         <mat-expansion-panel-header>
                             <!-- <mat-panel-title>
                                 Post Title
                             </mat-panel-title> -->
                             <mat-panel-description>
-                                {{pageIndex*pageSize+(i+1)}}. {{item?.title}}
+                                {{pageIndex*pageSize+(i+1)}}. {{item?.title | arrayToWords}}
                             </mat-panel-description>
                         </mat-expansion-panel-header>
                         <div [formGroupName]="i" class="flex flex-col gap-5 text-[1rem]">
                            <div class="w-full flex place-items-center">
                             <div class="w-[30%] text-[#FF046E] font-semibold">Title</div>
-                            <div class="w-[70%]"><input formControlName="title" type="text" class="outline-none border-none rounded-full bg-gray-100 p-[10px]" [readOnly]="!editMode" [value]="item?.title"></div>
+                            <div class="w-[70%]"><input formControlName="title" type="text" class="outline-none border-none rounded-full bg-gray-100 p-[10px]" [readOnly]="!editMode" [value]="item?.title | arrayToWords"></div>
                            </div>
     
                            <div class="w-full flex place-items-center">
